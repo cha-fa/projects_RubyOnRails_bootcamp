@@ -1,0 +1,29 @@
+<table class="table" style="width: 60%;">
+	<tbody>
+		<tr class="table-light" >
+			<th scope="row" style="width: 20%" >Prénom : </th>
+			<td><%= @user.first_name %></td>
+		</tr>
+		<tr class="table-light" >
+			<th scope="row" >Nom : </th>
+			<td><%= @user.last_name %></td>
+		</tr>
+		<tr class="table-light" >
+			<th scope="row">Email : </th>
+			<td><%=  @user.email %></td>
+		</tr>
+		<tr class="table-light" >
+			<th scope="row">Admin : </th>
+			<td><%=  @user.is_admin %></td>
+		</tr>
+		<tr class="table-light">
+			<th scope="row">Description : </th>
+			<td>"<i><%= @user.description %>"</i></td>
+		</tr>
+	</tbody>
+</table><br><br>
+
+<%= button_to "Modifier les informations de l'utilisateur", edit_admin_user_path(@user.id), class:"btn btn-warning", method:"get" %>
+<br>
+<br>
+<%= button_to "Supprimer l'utilisateur", admin_user_path(@user.id), class:"btn btn-danger", :method => :delete, data: { confirm: 'Souhaitez-vous supprimer définitivement cet utilisateur ?' } %>

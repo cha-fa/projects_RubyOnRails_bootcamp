@@ -1,0 +1,16 @@
+document.getElementById("left-<%= @email.id %>").innerHTML = '<%= j render "email", email: @email %>'
+document.getElementById("<%= @email.object %>-<%= @email.id %>").innerHTML = '<%= j render "show", email: @email %>'
+
+if(document.getElementById("left-<%= @email.id %>").style.fontWeight === "bold"){
+	document.getElementById("left-<%= @email.id %>").style.fontWeight = "lighter"
+}
+else {
+	document.getElementById("left-<%= @email.id %>").style.fontWeight = "bold"
+}
+
+if (document.getElementById("<%= @email.object %>-<%= @email.id %>").style.fontWeight === "bold" ){
+	document.getElementById("<%= @email.object %>-<%= @email.id %>").style.fontWeight = "lighter" 
+}
+else {
+	document.getElementById("<%= @email.object %>-<%= @email.id %>").style.fontWeight = "bold" 
+}

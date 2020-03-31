@@ -1,0 +1,8 @@
+<%= render 'item', item: @item %>
+
+
+<!-- Management of the event : add item.admin and admin interface required -->
+<!-- Management of the event : add item.admin and admin interface required -->
+<%if user_signed_in? && current_user.is_admin == true%>
+<p class="lead mt-3 mb-4 ml-3 text-center"><%= link_to "Modifier le produit", edit_item_path(@item.id), :class => "btn btn-dark" %></p>
+<%end%>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <!-- Bootstrap CSS -->
+
+
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <!-- bootswatch -->
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/journal/bootstrap.min.css"  crossorigin="anonymous">
+
+ <title>TheGossipProject</title>
+ <%= csrf_meta_tags %>
+ <%= csp_meta_tag %>
+
+ <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+ <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+
+  <header>
+    <div id="section0">
+      <div class="jumbotron">
+        <div class="jumb-content">
+          <h1 class="display-4">THE GOSSIP PROJECT</h1>
+        </div>
+      </div>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" <%= link_to "THE GOSSIP PROJECT", root_path %></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" <%= link_to "Accueil", root_path(User.last.id) %> <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" <%= link_to "Publier un potin", new_gossip_path %></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" <%= link_to "L'équipe", team_path %></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" <%= link_to "Contact", contact_path %></a>
+            </li>
+          </ul>
+
+          <ul class="navbar-nav-inline my-2 my-lg-0">
+          <% if logged_in? %>
+            <a class="btn btn btn-secondary my-2 my-sm-0" type="submit" <%= link_to "Se déconnecter", session_path(session.id), method: :delete %></a>
+          <% else  %>
+          <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle btn-lg" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Se connecter </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <a class="dropdown-item" <%= link_to "Créer un compte", new_user_path %></a>
+                <a class="dropdown-item" <%= link_to "J'ai déjà un compte", new_session_path %></a>
+          </div>
+      </div>
+    </ul>
+<%end%>
+
+
+
+
+</div>
+</nav>
+
+</header>
+<%= yield %>
+<footer class="page-footer">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Copyright: @Chachoudu44
+  </div>
+  <!-- Copyright -->
+
+</footer>
+</body>
+</html>
+ 

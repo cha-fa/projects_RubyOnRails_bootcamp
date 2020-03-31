@@ -1,0 +1,36 @@
+<p>Ma commande<p>
+
+	<h5>Commande n° 011<%= @order.id %></h5>
+	<section class="shopping-cart spad">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="cart-table">
+						<table>
+							<thead>
+								<tr>
+									<th>Nom du produit</th>
+									<th>Prix</th>
+									<th>URL de l'image</th>
+
+								</tr>
+							</thead>
+
+
+							<% @order.items.each do |item| %>
+							<tr>
+
+								<td class="p-price first-row", width="20%"><%= item.title %> </td>
+								<td class="qua-col first-row"><%= item.price_in_cents.to_f / 100%>€</td>
+								<td class="total-price first-row"><%=link_to item.image_url %></td>
+
+							</tr>
+							<% end %>
+
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<%= button_to "Toutes mes commandes", orders_path, class:"btn btn-primary" %>

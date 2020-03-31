@@ -1,0 +1,55 @@
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+<div class="center-card">
+  <div class="container text-center my-4">
+  <div class="flex-direction flex-row">
+    <div class="col-lg-10 col-xl-9 mx-auto">
+      <div class="card card-signin flex-row my-5">
+        <div class="card-img-left d-none d-md-flex">
+          <!-- Background image for card set in CSS! -->
+        </div>
+        <div class="card-body">
+        <i class="far fa-user fa-2x"></i>
+            <h2>Créer un compte</h2>
+            <p> Bienvenue sur le site Cat-shop! <br> La boutique de référence pour acheter des photos de chats. <p>
+
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+              <%= render "devise/shared/error_messages", resource: resource %>
+
+              <div class="field" class="form-control">
+                <%= f.label :email %><br />
+                <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+              </div>
+            <br>
+
+
+              <div class="field">
+                <%= f.label :Mot_de_passe %>
+                <% if @minimum_password_length %>
+                <em>(<%= @minimum_password_length %> caractères minimum)</em>
+                <% end %><br />
+                <%= f.password_field :password, autocomplete: "new-password" %>
+              </div>
+        
+            <div class="form-group my-4">
+              <div class="field">
+                <%= f.label :Confirmation_mot_de_passe %><br />
+                <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+              </div>
+            </div>
+        
+          
+              <div class="actions my-4">
+                <%= f.submit "Créer un compte", class:"btn btn-dark" %>
+              </div>
+            <% end %>
+        
+            
+      <p> Vous avez déjà un compte client? <p>
+            <%= render "devise/shared/links" %>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>

@@ -1,0 +1,46 @@
+<!-- Product Shop Section Begin -->
+<section class="product-shop spad page-details">
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-lg-9">
+
+                <div class="row">
+
+                    <div class="col-lg-6">
+                        <div class="product-pic-zoom">
+                            <% if item.picture.attached? %>
+                            <%= image_tag @item.picture, alt: 'item picture' %>
+                            <% else %>
+                            <%= image_tag "placeholder.png", alt: 'item picture' %>  
+                            <%end%>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="product-details">
+
+                            <div class="pd-title">
+                                
+                                <h3> <%= @item.title.capitalize %> </h3>
+                                <a href="#" class="heart-icon"><i class="icon_heart_alt"></i></a>
+                            </div>
+
+                            <div class="pd-desc">
+                                    <p><%= @item.description %>" </p>
+                                    <h4><%= (@item.price_in_cents.to_f / 100) %> € </h4>
+                            </div>
+                                                       
+
+                            <%= render 'add_to_cart', item: @item, user: @user %>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Product Shop Section End -->

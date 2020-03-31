@@ -1,0 +1,90 @@
+
+
+<% flash.each do |type, msg| %>
+<div class="alert alert-success">
+  <%= msg %>
+</div>
+<% end %>
+
+
+<div class="all">
+
+
+<h2>Voici le contenu du potin n°<%= params['id']%>
+  <br>
+
+  <center><div class="card" style="width: 50%;">
+    <img class="card-img-top" src=<%= Faker::LoremFlickr.grayscale_image(size: "650x250", search_terms: ['people']) %> alt="Card image cap">
+    <div class="card-body">
+      <h2 class="card-title">Titre : "<%= @gossip.title.capitalize %>"</h2>
+      <h3 class="card-text">Potin :<i> "<%= @gossip.content.capitalize %>"</i></h3>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Ecrit par : </strong><%= User.find(@gossip.user_id).first_name %> <%= User.find(@gossip.user_id).last_name %></li>
+      <li class="list-group-item">Ville de l'auteur : </strong><%= City.find(User.find(@gossip.user_id).city_id).name %> <%= link_to "(Voir la ville en détails)", city_path(City.find(User.find(@gossip.user_id).city_id)) %></li> 
+      <li class="list-group-item"><%= @gossip.created_at.strftime("Publié le %d/%m/%Y à %I:%M%p") %></li>
+    </ul>
+
+
+    <div class="card-body">
+      <a class="card-link" <%= link_to "Voir la page de l'auteur", user_path(params['id']) %></a>
+
+      <% if logged_in? && current_user.id == @gossip.user_id%>
+      <a class="card-link" <%= link_to "Editer le potin", edit_gossip_path(params['id']) %></a>
+      <% else  %>
+      <% end %>
+    </div>
+
+    <div class="card-footer">
+      <p><%= @gossip.likes.count %> likes - <%= @gossip.comments.count %> commentaires</p>
+
+      <%if logged_in? %>
+      <% pre_like = @gossip.likes.find { |like| like.user_id == current_user.id} %>
+      <% if pre_like %>
+      <a type="button" class="btn btn-outline-info"<%= link_to 'Unlike', gossip_like_path(@gossip, pre_like), method: :delete %></a>
+      <% else %>
+      <a type="button" class="btn btn-outline-info"<%= link_to 'Like', gossip_likes_path(@gossip), method: :post %></a>
+      <% end %>
+      <% else %>
+      <p class="small"><%= link_to "Créez un compte", new_user_path %> pour commenter et liker !</p>
+      <% end %>
+
+    </div>
+
+  </div>
+  <div class ="container">
+    <h4><%= @gossip.comments.count %> commentaires :</h4>
+    <br>
+
+    <%= form_tag gossip_comments_path((params['id'])), method: "post" do %>
+    <%= label_tag 'Ajouter un commentaire'%>
+    <br/>
+    <%= text_area_tag 'content' %>
+
+    <br /> <br />
+    <%= submit_tag "Publier le commentaire" , class: "btn btn-primary"%>
+
+    <% end %>
+  </div>
+  <br><br>
+  <br><br>
+
+  <p align="left">Commentaires :</p>
+
+  <div class ="container">
+    <% @gossip.comments.each do |comment|%>
+    <div class= "card">
+      <h5 class="card-title"><%= comment.content %></h5>
+      <p class="card-text"><%= comment.user.first_name %></p>
+      <p class="card-subtitle mb-2 text-muted">Publié le : <%= comment.created_at%></p>
+      <%= link_to "Editer le commentaire", edit_gossip_comment_path(params['id'], comment.id), class: "btn text-primary"%>
+    </div>
+    <%end%>
+  </div>
+
+<br><br>
+<a class="btn btn-primary"<%= link_to "Retour à la liste des potins", root_path %></a>
+<br><br>
+</center>
+
+</div>

@@ -1,0 +1,50 @@
+<%= form_tag url_for(action: 'update'), method: "patch" do %>
+
+<% if @user.errors.any? %>
+
+   <div class="alert alert-danger" role="alert">
+    <p>Nous n'avons pas réussi à modifier l'évènement' pour la (ou les) raison(s) suivante(s) :</p>
+    <% @user.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+  </div>
+  <% end %>
+  <p><strong> Réessaye en respectant bien les conditions ;)</strong></p>
+<% end %>
+
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h1 class="h3 mb-3 font-weight-normal text-center" id="Publier">Modifier un  utilisateur</h1>
+        <div class="form-group" >
+          <label class="col-form-label" for="inputDefault">Prénom : </label>
+          <input type="text" class="form-control" value="<%= @user.first_name %>" id="inputDefault" name="first_name" >
+
+          <label class="col-form-label" for="inputDefault">Nom : </label>
+          <input type="text" class="form-control" value="<%= @user.last_name %>" id="inputDefault" name="last_name" >
+
+          <label class="col-form-label" for="inputDefault">Email : </label>
+          <input type="text" class="form-control" id="inputDefault" name="email" value="<%= @user.email %>">
+
+          <label class="col-form-label" for="inputDefault">Description :</label>
+          <input type="text" class="form-control" value="<%= @user.description %>" id="inputDefault" name="description">
+
+          <label class="col-form-label" for="inputDefault">Is_admin :</label>
+          <input type="text" class="form-control" value="<%= @user.is_admin %>" id="inputDefault" name="is_admin">
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg">Modifier l'utilisateur</button>
+
+
+        <% end %>
+        <br>
+
+<%= button_to "Supprimer l'utilisateur", admin_user_path(@user.id), class:"btn btn-danger btn-lg", :method => :delete, data: { confirm: 'Souhaitez-vous supprimer définitivement cet évènement ?' } %>
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+</div>

@@ -1,0 +1,75 @@
+
+<!-- faire une boucle sur @items pour tous les afficher. faire une colonne "quantité", et agréger si le produit existe plusieurs fois. -->
+
+<% if @items_list.length < 1 %>
+<p>Votre panier est vide ! </p>
+
+
+<%else%>
+
+<!-- Shopping Cart Section Begin -->
+<section class="shopping-cart spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="cart-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Aperçu</th>
+                                <th class="p-name">Nom du produit</th>
+                                <th>Prix</th>
+                                <th>Quantité</th>
+                                <th>Total</th>
+                                <th><i class="far fa-trash-alt" style="color: black;"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            <% @total_price = 0 %>
+                            <% @items_list.each do |object| %>
+
+                            <tr>
+                                <td class="cart-pic first-row"
+                                <% if object.item.picture.attached? %>
+                                <%= image_tag object.item.picture, alt: 'item picture' %>
+                                <% else %>
+                                <%= image_tag "placeholder.png", alt: 'item picture' %>  
+                                <%end%></td>
+                                <td class="cart-title first-row">
+                                    <h5><%= object.item.title %></h5>
+                                </td>
+                                <td class="p-price first-row"><%= (object.item.price_in_cents.to_f / 100) %> €</td>
+                                <td class="qua-col first-row">1</td>
+                                <td class="total-price first-row"><%= object.item.price_in_cents.to_f / 100 %> €</td>
+                                <td class="close-td first-row"><%= link_to ('<i class="far fa-trash-alt" style="color: red;"></i>').html_safe, user_cart_join_item_cart_path(@user.id, @cart.id, object.id), method: :delete%></td>
+                            </tr>
+                            <% @total_price += object.item.price_in_cents %>
+                            <% end %>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                   <div class="col-lg-4">
+                      <%= button_to "VIDER MON PANIER", user_cart_path(@user.id), method: :delete, class:"btn btn-danger"%>
+                  </div>
+                  <div class="col-lg-4 offset-lg-4">
+                    <div class="proceed-checkout">
+                        <ul>
+                            <li class="cart-total">Total <span><%= @total_price.to_f / 100  %>€</span></li>
+                        </ul>
+
+                        <%= link_to "EFFECTUER LE PAIEMENT", new_order_path(:total_price => @total_price), class:"proceed-btn" %>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<!-- Shopping Cart Section End -->
+
+<% end %>

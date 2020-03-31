@@ -1,0 +1,111 @@
+<header class="header-section">
+<!-- <div class="header-top">
+	<div class="container">
+	<div class="inner-header">
+			<div class="row">
+				<div class="col-lg-2 col-md-2">
+					<div class="logo">
+						<%= link_to root_path do %>
+						<%=image_tag("logo_transparent.png")%>
+						<% end %>
+				</div>
+			</div>
+			<div class="col-lg-7 col-md-7">
+					<div class="advanced-search">
+						<div class="input-group">
+							<input type="text" placeholder="What do you need?">
+							<button type="button"><i class="fas fa-search"></i></button>
+						</div>
+					</div>
+				</div> -->
+<!-- 				<div class="col-lg-3 text-right col-md-3">
+					<ul class="nav-right">
+						<li class="cart-icon">
+							<a href="#">
+								<i class="fas fa-shopping-basket"></i>
+								<span>3</span>
+							</a>
+							<div class="cart-hover">
+								<div class="select-items">
+									<table>
+										<tbody>
+											<tr>
+												<td class="si-pic"><img src="#" alt=""></td>
+												<td class="si-text">
+													<div class="product-selected">
+														<p>$60.00 x 1</p>
+														<h6>Kabino Bedside Table</h6>
+													</div>
+												</td>
+												<td class="si-close">
+													<i class="ti-close"></i>
+												</td>
+											</tr>
+											<tr>
+												<td class="si-pic"><img src="#" alt=""></td>
+												<td class="si-text">
+													<div class="product-selected">
+														<p>$60.00 x 1</p>
+														<h6>Kabino Bedside Table</h6>
+													</div>
+												</td>
+												<td class="si-close">
+													<i class="ti-close"></i>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="select-total">
+									<span>total:</span>
+									<h5>$120.00</h5>
+								</div>
+								<div class="select-button">
+									<a href="#" class="primary-btn view-card">VIEW CARD</a>
+									<a href="#" class="primary-btn checkout-btn">CHECK OUT</a>
+								</div>
+							</div>
+						</li>
+						<li class="cart-price">$150.00</li>
+					</ul>
+				</div>
+			</div> 
+		</div>
+	</div>-->
+
+	<div class="nav-item">
+		<div class="container">
+		<div class="col-lg-1"></div>
+		<div class="col-lg-11">
+			<nav class="nav-menu mobile-menu d-flex justify-content-between">
+				<ul>
+					<li class="mx-5"><%=image_tag("logo_transparent_min.png")%></li>
+					<li class="active"><%= link_to "Nos produits", root_path %></li>
+					<li><%= link_to "Nous contacter", root_path %></li> 
+						<% if user_signed_in? %>
+						<li><%= link_to user_cart_path(current_user.id, current_user.cart.id) do %><i class="fas fa-shopping-basket", style="margin-right: 8px;"></i><span><%= JoinItemCart.where(cart: current_user.cart).length%></span><% end %></li>
+						<li class="mx-5" style="color: white; font-weight: 700; font-size: 14px;"><i class="fa fa-user", style="margin-right: 8px;"></i>MON COMPTE</a>
+						<ul class="dropdown">
+							<li><%= link_to "Mes commandes", orders_path%></li>
+							<li><%= link_to "Mon profil", user_path(current_user.id)%></li>
+							<li><%= link_to "Se déconnecter", destroy_user_session_path, method: :delete%></li>
+						</ul>
+						</li>
+						<%else%>
+						<li class="mx-5" style="color: white; font-weight: 600;"><i class="fa fa-user", style="margin-right: 8px;"></i>SE CONNECTER</a>
+							<ul class="dropdown">
+								<li><%= link_to "CREER UN COMPTE", new_user_registration_path %></li>
+								<li><%= link_to "SE CONNECTER A MON COMPTE", new_user_session_path %></li>
+							</ul>
+						</li>
+					</div>
+					<%end%>
+				</ul>
+			</nav>
+			</div>
+			<div class="col-lg-1"></div>
+			<div id="mobile-menu-wrap"></div>
+		</div>
+	</div>
+	</div>
+</header>

@@ -1,0 +1,18 @@
+<div class="all">
+
+ <h1>Editer un commentaire</h1>
+
+<%= form_for([@gossip, @comment ]) do  |f| %>
+
+  <div class = "form-group">  
+    <label>Pour modifier votre commentaire, indiquez son nouveau contenu ci-dessous :</label>
+    <%= f.text_area :content, class:"form-control"%>
+  </div>
+  <div class ="form-group">
+    <button type="submit" class= "btn btn-primary">Modifier le commentaire</button>
+  </div>
+<% end %>
+
+<%= link_to 'Supprimer le commentaire', gossip_comment_path(@comment.id), :class => "btn btn-danger",:method => :delete, data: { confirm: 'Êtes-vous sûr ?' } %>
+
+</div>

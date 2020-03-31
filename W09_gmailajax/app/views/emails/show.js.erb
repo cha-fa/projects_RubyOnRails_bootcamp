@@ -1,0 +1,8 @@
+
+document.getElementById("<%= @email.object %>-<%= @email.id %>").innerHTML = '<%= j render "show", email: @email %>'
+document.getElementById("<%= @email.object %>-<%= @email.id %>").classList.toggle("collapse")
+
+
+document.getElementById("left-<%= @email.id %>").style.fontWeight = "lighter"
+document.getElementById("<%= @email.object %>-<%= @email.id %>").style.fontWeight = "lighter" 
+

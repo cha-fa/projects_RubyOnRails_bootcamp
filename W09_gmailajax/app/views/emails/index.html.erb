@@ -1,0 +1,18 @@
+<%= button_to "Recevoir un email", emails_path, :method => :create, class:"btn btn-primary float-right", style:"margin-right: 60px; margin-bottom: 20px;", remote: true %>
+
+<table class="table table-striped mx-auto" style="width: 90%;">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col" style="width: 30%:">Liste des emails</th>
+      <th scope="col" style="width: 70%">Email sélectionné</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% Email.all.each do |email| %>
+    <tr id="<%= email.id %>">
+      <td id="left-<%= email.id %>" style="font-weight: bold;"><%= link_to email.object, email_path(email.id),  remote: true %></td>
+      <td id="<%= email.object %>-<%= email.id %>" class="collapse"></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

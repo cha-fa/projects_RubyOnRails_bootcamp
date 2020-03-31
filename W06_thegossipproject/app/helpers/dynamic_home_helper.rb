@@ -1,0 +1,2 @@
+module DynamicHomeHelper
+end

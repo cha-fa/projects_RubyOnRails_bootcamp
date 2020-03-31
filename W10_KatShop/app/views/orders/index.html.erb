@@ -1,0 +1,49 @@
+<h3>Mes commandes</h3>
+
+<% if @orders.length < 1 %>
+	<p>Comment ça vous n'avez pas encore craqué pour un de nos chatons ?! </p>
+	<%button_to "C'est par ici pour faire votre choix", root_path, class: "btn btn-primary"%>
+
+<%else%>
+<section class="shopping-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="cart-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>N° de commande</th>
+                                    <th>Date</th>
+                                    <th>Nombre de photos commandées</th>
+                                    <th>Montant réglé</th>
+                                    <th><i class="far fa-eye", style="color: black;"></i></i></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                            <% @orders.each do |order| %>
+
+                                <tr>
+                                    <td class="cart-title first-row", width="15%">
+                                        <h5>011<%= order.id %></h5>
+                                    </td>
+                                    <td class="p-price first-row", width="20%"><%= order.created_at.strftime("%d/%m/%Y") %> </td>
+                                    <td class="qua-col first-row"><%= order.items.length%></td>
+                                    <td class="total-price first-row"><%= order.total_price.to_f / 100 %> €</td>
+                                    <td class="close-td first-row"><%= link_to ('<i class="far fa-eye", style="color: black;"></i>').html_safe, order_path(order.id)%></td>
+                                </tr>
+                            
+                                <% end %>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<%end%>

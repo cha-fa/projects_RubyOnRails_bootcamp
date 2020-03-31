@@ -1,0 +1,24 @@
+<div class="all">
+
+<center>
+<div class="card mb-3">
+  <h3 class="card-header"><%= User.find(@gossip.user_id).first_name %> <%= User.find(@gossip.user_id).last_name %></h3>
+  <div class="card-body">
+  	    <h5 class="card-title"><i>"<%= User.find(@gossip.user_id).description %>"</i></h5>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Son email : <%= User.find(@gossip.user_id).email %></li>
+    <li class="list-group-item">Son age : <%= User.find(@gossip.user_id).age %> ans</li>
+    <li class="list-group-item">Sa ville : </strong> <%= City.find(User.find(@gossip.user_id).city_id).name %>
+      <%= link_to "(Voir la ville en détails)", city_path(City.find(User.find(@gossip.user_id).city_id)) %></li>
+  </ul>
+  <div class="card-body">
+    <a class="card-link" <%= link_to "Retour à la liste des potins", root_path %></a>
+  </div>
+  <div class="card-footer text-muted">
+    Inscrit.e depuis le <%= User.find(@gossip.user_id).created_at.strftime("%d/%m/%Y") %>
+  </div>
+</div>
+</center>
+ 
+ </div>

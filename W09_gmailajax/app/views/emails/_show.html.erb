@@ -1,0 +1,9 @@
+<h5>Objet: <%= @email.object %></h5>
+<p><%= @email.body %></p>
+
+<%= button_to "Supprimer", email_path(@email.id), :method => :delete, class:"btn btn-sm btn-danger", remote: true%>
+<% if @email.read == true %>
+<%= button_to "Marquer comme non-lu", email_path(@email.id),  :method => :patch, class:"btn btn-sm btn-secondary", remote: true%>
+<%else%>
+<%= button_to "Marquer comme lu", email_path(@email.id),  :method => :patch, class:"btn btn-sm btn-secondary", remote: true%>
+<%end%>

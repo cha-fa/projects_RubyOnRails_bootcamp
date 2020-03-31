@@ -1,0 +1,39 @@
+
+<div class="all">
+<h1>Vous consultez les potins de la ville de : <%= City.find(params[:id]).name %></h1>
+
+
+<% Gossip.all.each do |gossip|%>
+	<% if gossip.user.city_id.to_i == params[:id].to_i %>
+
+<center><div class="card">
+	<div class="card-header text-center">
+		<strong> <%= link_to "Potin n° #{gossip.id}", gossip_path(gossip.id) %></strong> : <%= gossip.title.capitalize %>
+	</div>
+
+	<div class="card-body text-center">
+		<h5 class="card-title"><strong>Ecrit par : </strong><%= gossip.user.first_name %> <%= gossip.user.last_name%> </h5>
+		<p class="card-text"><%= gossip.created_at.strftime("Publié le %d/%m/%Y à %I:%M%p") %></p>
+		<a class="btn btn-primary"<%= link_to "Voir la page du potin", gossip_path(gossip.id)  %></a>
+	</div>
+</div>
+<p><%= gossip.likes.count %> likes - <%= gossip.comments.count %> commentaires</p>
+
+<%if logged_in? %>
+  <% pre_like = gossip.likes.find { |like| like.user_id == current_user.id} %>
+  <% if pre_like %>
+  <a type="button" class="btn btn-outline-info"<%= link_to 'Unlike', gossip_like_path(gossip, pre_like), method: :delete %></a>
+  <% else %>
+  <a type="button" class="btn btn-outline-info"<%= link_to 'Like', gossip_likes_path(gossip), method: :post %></a><br>
+  <% end %>
+<% else %>
+  <p class="small"><%= link_to "Créez un compte", new_user_path %> pour commenter et liker !</p>
+<% end %>
+
+<br>
+<hr class="style15">
+<br>
+<% end %>
+</center>
+ <% end %>
+</div>

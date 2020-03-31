@@ -1,0 +1,17 @@
+<% if user_signed_in? %>
+
+<div class="quantity">
+	<%= form_tag(user_cart_join_item_carts_path(@user.id, @cart.id), :action => "create", :method => "post") do %>
+		<%= hidden_field_tag :item_id, @item.id %>
+		<%= number_field_tag :quantity, "1", within: 1...20, class:"pro-qty" %>
+		<%= submit_tag "Ajouter au panier", class:"h-30 primary-btn", :remote => :true %>
+	<% end %>
+</div>
+
+<% else %>
+
+<div class="quantity">
+	<%= button_to "Créer un compte pour acheter", new_user_registration_path, method:"get", class:"h-30 primary-btn " %>
+</div>
+
+<% end %> 

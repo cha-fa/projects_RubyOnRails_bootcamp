@@ -1,0 +1,51 @@
+ 
+<center>
+  <div class="card" style="width: 50%;">
+    <% if @event.event_picture.attached? %>
+    <%= image_tag @event.event_picture.variant(resize: "500x350"), alt: 'avatar' %>
+    <% else %>
+    <a href="#"><img class="card-img-top" src="https://images.pexels.com/photos/1157557/pexels-photo-1157557.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" height="250" width="250" alt=""></a>
+    <% end %>
+    <div class="card-body">
+      <h2 class="card-title"><%= @event.title.capitalize %></h2>
+      <h3 class="card-text">En bref :<i> "<%= @event.description.capitalize %>"</i></h3>
+    </div>
+    <ul class="list-group list-group-flush" style="font-size: 17px;">
+      <li class="list-group-item"><strong>Commence </strong><%= @event.start_date.strftime("le %d/%m/%Y à %I:%M") %></li>
+      <li class="list-group-item"><strong>Termine </strong><%= @event.end_date.strftime("le %d/%m/%Y à %I:%M") %></li>
+      <li class="list-group-item"><strong>Lieu : </strong><%= @event.location %> </li>
+      <li class="list-group-item"><strong>Prix : </strong><%= @event.price %> €</li>
+      <li class="list-group-item"><strong>Proposé par : </strong><%= @event.administrator.first_name %>. <strong>Son email :</strong> <%= @event.administrator.email %></li>
+      <div class="card-footer text-center">
+
+
+        <% if current_user == @event.administrator %>
+          <%= button_to "Mon espace évènement", event_attendances_path(@event.id), class:"btn btn-info btn-lg", method:'get'  %>
+          <% if @event.validated == true %>
+          <p>L'évenement a été validé par l'administration et est publié </p>
+          <%else%>
+          <p>L'évènement est en attente de validation par l'administration</p>
+          <% end %>
+        <% end %>
+        <br>
+        <% if user_signed_in? %>
+        <% if Attendance.find_by(event_id: @event.id, user_id: current_user.id)%>
+        <p>Vous êtes déjà inscrit à cet évènement</p>
+        <% else %>
+        <%= button_to "Rejoindre l'évènement", new_event_attendance_path(params[:id]), class:"btn btn-primary btn-lg", method:'get'  %>
+        <% end %>
+        <%else%>
+        <% end %>
+
+
+        <li class="list-group-item"><strong>Nombres d'inscrits : </strong><%= @attendance.count %>
+        </div>
+
+
+
+      </ul>
+
+    </div>
+
+    <%= link_to "<< Retour à la liste des évènements", root_path, class:"btn btn-primary btn-lg"  %></a>
+  </center>

@@ -1,0 +1,15 @@
+<h3 class="h5 my-2 ml-3 text-center">Insérer ou modifier la photo du produit ici:</h3>
+<div class="row">
+  <div class="col-4"></div>
+  <div class="col-4 p-5">
+    <%= form_tag item_pictures_path(@item), multipart: true do %>
+      <div class="d-flex flex-column justify-content-around">
+        <%= file_field_tag :picture, class: "btn btn-light" %>
+        <p></p>
+        <%= submit_tag "Enregistrer l'image", class: "btn btn-dark" %>
+      </div>
+      <% end %>
+  </div>
+  <div class="col-4"></div>
+</div>
+

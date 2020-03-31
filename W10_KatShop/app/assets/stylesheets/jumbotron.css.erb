@@ -1,0 +1,24 @@
+.jumbotron {
+  padding: 2rem 1rem;
+  margin-top: -10pt;
+  margin-bottom: 0rem;
+  border-radius: 0.3rem;
+  height: 350px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.339),rgba(0, 0, 0, 0.339)), url(<%= asset_path 'cat_jumbotron.jpg' %>);
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 476px) {
+  .jumbotron {
+    padding: 4rem 2rem;
+  }
+}
+
+.jumbotron-fluid {
+  padding-right: 0;
+  padding-left: 0;
+  border-radius: 0;
+}

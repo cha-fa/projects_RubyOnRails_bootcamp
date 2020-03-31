@@ -1,0 +1,52 @@
+<%= form_tag url_for(action: 'update'), method: "patch", multipart: true do %>
+   <% if @event.errors.any? %>
+
+   <div class="alert alert-danger" role="alert">
+    <p>Nous n'avons pas réussi à modifier l'évènement' pour la (ou les) raison(s) suivante(s) :</p>
+    <% @event.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+  </div>
+  <% end %>
+  <p><strong> Réessaye en respectant bien les conditions ;)</strong></p>
+  <% end %>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h1 class="h3 mb-3 font-weight-normal text-center" id="Publier">Editer un  évènement</h1>
+        <p>Remplis le formulaire ci-dessous pour modifier ton évènement !</p>
+        <div class="form-group" >
+          <label class="col-form-label" for="inputDefault">Titre de l'évènement : </label>
+          <input type="text" class="form-control" value="<%= @event.title %>" id="inputDefault" name="title" >
+
+          <label class="col-form-label" for="inputDefault">Date : </label>
+          <input type="text" class="form-control" value="<%= @event.start_date %>" id="inputDefault" name="start_date" >
+
+          <label class="col-form-label" for="inputDefault">Durée en minutes : </label>
+          <input type="text" class="form-control" id="inputDefault" name="duration" value="<%= @event.duration %>">
+
+          <label class="col-form-label" for="inputDefault">Prix :</label>
+          <input type="text" class="form-control" value="<%= @event.price %>" id="inputDefault" name="price">
+
+          <label class="col-form-label" for="inputDefault">Lieu :</label>
+          <input type="text" class="form-control" value="<%= @event.location %>" id="inputDefault" name="location">
+
+          <label for="exampleTextarea">Description de l'évènement :</label>
+          <input class="form-control" id="exampleTextarea" value="<%= @event.description %>" rows="6" name="description"></input>       
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg">Modifier l'évènement</button>
+
+
+        <% end %>
+        <br>
+
+<%= link_to "Supprimer l'évènement", event_path(params['id']), :class => "btn btn-danger btn-block btn-lg",:method => :delete, data: { confirm: 'Souhaitez-vous supprimer définitivement cet évènement ?' } %>
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+</div>

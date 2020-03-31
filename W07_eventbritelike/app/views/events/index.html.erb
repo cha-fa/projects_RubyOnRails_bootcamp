@@ -1,0 +1,50 @@
+ 
+<% flash.each do |type, msg| %>
+<div class="alert alert-success">
+	<%= msg %>
+</div>
+<% end %>
+
+
+
+<h3 style="text-align: center;">A quel évènement allez-vous participer prochainement ?</h3>
+<br>
+
+<br>
+
+<div class="row" >
+	<% Event.all.each do |event|%>
+	<% if event.validated == true %>
+	<div class="col-lg-4 col-sm-6 portfolio-item">
+		<div class="card h-100">
+			<br>
+			<div class="card-header text-center">
+				<h3> <%= event.title.capitalize %></h3>
+				<% if event.event_picture.attached? %>
+			    	<%= image_tag event.event_picture.variant(resize: "300x300"), alt: 'avatar' %>
+			    <% else %>
+			    	<a href="#"><img class="card-img-top" src="https://images.pexels.com/photos/1157557/pexels-photo-1157557.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" height="250" width="250" alt=""></a>
+			    <% end %>
+			</div>
+			<div class="card-body text-center" >
+				<h5 class="card-title"><strong>Date : </strong><%= event.start_date.strftime("le %d/%m/%Y à %I:%M") %> </h5>
+				<h5 class="card-text">Lieu :<%= event.location %></h5><br>
+				<p class="card-text" style="font-size: 13px;">Description : "<%= event.description %>"</p>
+			</div>
+			<div class="card-footer text-center">
+				<%= button_to "En savoir plus", event_path(event.id), class:"btn btn-primary btn-lg", method:'get' %>
+				<br><br>
+			</div>
+		</div>
+		<br>
+		<hr class="style15"><br>
+	</div>
+	<% end %>
+	<% end %>
+</div>
+
+<center>
+	<h3 style="text-align: center;">Si aucun ne vous tente, créez le vôtre !</h3>
+	<%= button_to "Créer un évènement >>", new_event_path, class:"btn btn-primary btn-lg", method:'get'  %>
+</center>
+

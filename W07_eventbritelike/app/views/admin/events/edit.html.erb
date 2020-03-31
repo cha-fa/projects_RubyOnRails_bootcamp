@@ -1,0 +1,49 @@
+<%= form_tag url_for(action: 'update'), method: "patch" do %>
+
+<% if @event.errors.any? %>
+
+   <div class="alert alert-danger" role="alert">
+    <p>Nous n'avons pas réussi à modifier l'évènement' pour la (ou les) raison(s) suivante(s) :</p>
+    <% @event.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+  </div>
+  <% end %>
+  <p><strong> Réessaye en respectant bien les conditions ;)</strong></p>
+<% end %>
+
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h1 class="h3 mb-3 font-weight-normal text-center" id="Publier">Modifier un évènemement</h1>
+        <div class="form-group" >
+          <label class="col-form-label" for="inputDefault">Titre : </label>
+          <input type="text" class="form-control" value="<%= @event.title %>" id="inputDefault" name="title" >
+
+          <label class="col-form-label" for="inputDefault">Description : </label>
+          <input type="text" class="form-control" value="<%= @event.description %>" id="inputDefault" name="description" >
+
+          <label class="col-form-label" for="inputDefault">Lieu : </label>
+          <input type="text" class="form-control" id="inputDefault" name="location" value="<%= @event.location %>">
+
+          <label class="col-form-label" for="inputDefault">Durée en minutes :</label>
+          <input type="text" class="form-control" value="<%= @event.duration %>" id="inputDefault" name="duration">
+
+          <label class="col-form-label" for="inputDefault">Prix en € :</label>
+          <input type="text" class="form-control" value="<%= @event.price %>" id="inputDefault" name="price">
+
+          <label class="col-form-label" for="inputDefault">Date:</label>
+          <input type="text" class="form-control" value="<%= @event.start_date %>" id="inputDefault" name="start_date">
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg">Modifier l'évènement</button>
+
+
+        <% end %>
+        <br>
+
+<%= button_to "Supprimer l'évènement", admin_events_path, class:"btn btn-danger btn-lg", :method => :delete, data: { confirm: 'Souhaitez-vous supprimer définitivement cet évènement ?' } %>
+
+
+      </div>
+    </div>
+  </div>

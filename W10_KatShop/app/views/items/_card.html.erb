@@ -1,0 +1,44 @@
+<% @items.sort_by(&:created_at).each.with_index(1) do |item| %>
+<div class="col-lg-4 col-sm-6">
+  <div class="product-item mb-5">
+    <div class="pi-pic">
+      <%= link_to item_path(item.id) do %>
+        <% if item.picture.attached? %>
+          <%= image_tag item.picture, alt: 'item picture' %>
+          <% else %>
+          <%= image_tag "placeholder.png", alt: 'item picture' %>  
+          <%end%>
+        <%end%>
+      <ul>
+
+        <% if user_signed_in? %>
+        <li class="w-icon active">
+          <%= form_tag(user_cart_join_item_carts_path(@user.id, @cart.id), :action => "create", :method => "post") do %>
+          <%= hidden_field_tag :item_id, item.id %>
+          <%= hidden_field_tag :quantity, "1" %>
+          
+          <%= button_tag type: 'submit',  style:"background-color: #e7ab3c;" do %>
+          <i class="fas fa-shopping-basket", style="color: white;"></i>
+          <% end %>
+        
+
+          <% end %>
+
+        </li>
+        <% end %>
+
+        <li class="quick-view"><%= link_to "VOIR PLUS", item_path(item.id) %></li>
+      </ul>
+    </div>
+    <div class="pi-text">
+      <div class="catagory-name"><%=item.title%></div>
+      <%= link_to item_path(item.id) do %>
+      <h5><%= item.description[0..25]%>...</h5>
+      <%end%>
+      <div class="product-price">
+        <%=item.price_in_cents.to_f / 100 %> €
+      </div>
+    </div>
+  </div>
+</div>
+<%end%>

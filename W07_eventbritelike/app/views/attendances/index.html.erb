@@ -1,0 +1,35 @@
+<div class="all">
+
+<h3>Il y actuellement <%= @attendances.count %> participant pour l'évènement "<%= @event.title %>", les voici :"</h3>
+
+<div class="row" >
+	<% @attendances.each do |attendance|%>
+
+	<div class="col-lg-4 col-sm-6 portfolio-item">
+		<div class="card h-100">
+			<br>
+			<div class="card-body text-center" >
+				<h5 class="card-title"><%= attendance.user.first_name %> <%= attendance.user.last_name %>  </h5>
+				<h5 class="card-text"><%= attendance.user.email %> </h5><br>
+			</div>
+
+		</div>
+		<br>
+	</div>
+	<% end %>
+</div>
+
+<br>
+<h3>Changer de photo d'évènement ?</h3>
+<%= form_tag event_event_pictures_path(@event), multipart: true do %>
+  <%= file_field_tag :event_picture %><br>
+  <%= submit_tag "Mettre à jour", class:"btn btn-info btn-lg"%>
+<% end %>
+<br><br>
+
+<%= button_to "Retour à la page de l'évènement", event_path(@event.id), class:"btn btn-primary btn-lg", method:'get' %>
+<br><br>
+
+<%= button_to "Modifier mon évènement", edit_event_path(@event.id), class:"btn btn-danger btn-lg", method:'get' %>
+<br><br>
+</div>

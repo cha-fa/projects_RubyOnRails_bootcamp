@@ -1,0 +1,33 @@
+  <% flash.each do |type, msg| %>
+  <div class="alert alert-danger">
+    <%= msg %>
+  </div>
+  <% end %>
+
+<div class="all">
+
+
+
+  <br><br>
+  <a class="btn btn-primary" style="float: right;"<%= link_to "Je n'ai pas de compte", new_user_path %></a>
+  <br><br>
+
+  <%= form_tag url_for(action: 'create'), method: "post" do %>
+
+  <center>
+    <div class="form-group">
+      <label class="col-form-label" for="inputDefault">Adresse email</label>
+      <input type="text" class="form-control" placeholder="Ton email" id="inputDefault" name="email">
+
+      <label for="exampleInputPassword1">Mot de passe</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Mot de passe" name="password">
+    </div><br>
+
+
+    <button type="submit" class= "btn btn-primary">Me connecter</button>
+    <% end %>
+
+  </center>
+
+
+</div>

@@ -1,0 +1,50 @@
+ 
+<% flash.each do |type, msg| %>
+<div class="alert alert-success">
+    <%= msg %>
+</div>
+<% end %>
+
+<div class="card mb-4">
+    <div class="card-header">Tous les évènements</div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Titre</th>
+                            <th>Date</th>
+                            <th>Id de l'organisateur</th>
+                            <th>Validation</th>
+                            <th>Modifier</th>
+                        </tr>
+                    </thead>
+
+
+<% Event.all.each do |event| %>
+                    <tbody>
+                        <tr>
+                            <td><%= event.id %></td>
+                            <td><%= event.title %></td>
+                            <td><%= event.start_date %></td>
+                            <td><%= event.administrator_id %></td>
+                            <td>
+                                <% if event.validated == true %>
+                                    <p>Publié</p>
+                                    <%= button_to "Dépublier l'évènement", admin_event_submission_path(event.id), class:"btn btn-danger", method:"delete" %>
+                                <% else %>
+                                    <p>Non publié</p>
+                                    <%= button_to "Publier l'évènement", admin_event_submission_path(event.id), class:"btn btn-warning", method:"patch" %>
+                                <% end %>
+                            </td>
+
+                            <td><%= button_to "Modifier", admin_event_path(event.id), class:"btn btn-danger", method:"get" %></td>
+                        </tr>
+                    </tbody>
+                    <% end %>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

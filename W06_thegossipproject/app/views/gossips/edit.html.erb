@@ -1,0 +1,41 @@
+<div class="all">
+<h1>Editer le potin n°<%= params['id']%></h1>
+
+<h4>Pour rappel, le potin actuel est :</h4>
+<p><strong>Titre :</strong> <%= @gossip.title.capitalize %> </p>
+<p><strong>Contenu :</strong> <%= @gossip.content.capitalize %> </p>
+
+<h4>Pour modifier le potin, remplissez le formulaire ci-dessous :</h4>
+
+<%= form_tag url_for(action: 'update'), method: "patch" do %>
+	  <% if @gossip.errors.any? %>
+
+	  <div class="alert alert-danger" role="alert">
+  <p>Nous n'avons pas réussi à modifier le potin pour la (ou les) raison(s) suivante(s) :</p>
+    <% @gossip.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+        </div>
+    <% end %>
+    <p><strong> Réessaye en respectant bien les conditions ;)</strong></p>
+  <% end %>
+
+<div class="form-group" >
+  <label class="col-form-label" for="inputDefault">Titre du potin</label>
+  <input type="text" class="form-control" placeholder="Titre" id="inputDefault" name="new_title">
+</div>
+
+<div class="form-group">
+  <label for="exampleTextarea">Contenu du potin</label>
+  <textarea class="form-control" id="exampleTextarea" rows="6" name="new_content"></textarea>
+</div>
+
+    <button type="submit" class="btn btn-primary">Editer le potin</button>
+
+<% end %>
+
+<br><br>
+<%= link_to 'Supprimer le potin', gossip_path(params['id']), :class => "btn btn-danger",:method => :delete, data: { confirm: 'Souhaitez-vous supprimer définitivement ce potin ?' } %>
+<br><br>
+
+
+</div>
