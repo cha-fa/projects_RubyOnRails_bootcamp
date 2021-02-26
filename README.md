@@ -1,4 +1,5 @@
-# THE HACKING PROJECT
+# Projects from Ruby on Rails bootcamp
+
 Projects created during @thehackingproject bootcamp (12 weeks) on Ruby on Rails, CSS/HTML and javascript.
 From January 2020 to march 2020.
 
